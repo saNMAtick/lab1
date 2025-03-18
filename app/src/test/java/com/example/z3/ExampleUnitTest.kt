@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.z3
 
 import org.junit.Test
 

@@ -1,3 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">НМедиа</string>
+    <string name="sys">НМедиа!</string>
+    <string name="text">Adidas</string>
+    <string name="text1">21 мая в 18:36</string>
+    <string name="_27">228</string>
+    <string name="_8">69</string>
+    <string name="_12">229</string>
+    <string name="text2">adidas — производитель спортивной одежды и обуви, основанный в 1949 году в Германии. «Бренд с тремя полосками» является одной из крупнейших спортивных компаний в истории. Гений инноваций, легенда теннисных кортов и всевозможных кроссовок, adidas оказал огромное влияние на индустрию спортивных товаров, моду, культуру и музыку.</string>
 </resources>

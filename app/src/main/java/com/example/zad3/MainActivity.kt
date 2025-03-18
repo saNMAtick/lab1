@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.zad3
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

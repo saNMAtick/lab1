@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +19,7 @@ interface OnInteractionListener {
     fun onLike(post: Post) {}
     fun onEdit(post: Post) {}
     fun onRemove(post: Post) {}
+
     fun onShare(post: Post) {}
 }
 
@@ -36,16 +38,6 @@ class PostsAdapter(
     }
 }
 
-class PostDiffCallback : DiffUtil.ItemCallback<Post>() {
-    override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
-        return oldItem.id == newItem.id
-    }
-
-    override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
-        return oldItem == newItem
-    }
-}
-
 class PostViewHolder(
     private val binding: CardPostBinding,
     private val onInteractionListener: OnInteractionListener,
@@ -58,9 +50,13 @@ class PostViewHolder(
             textView1.text = post.author
             textView2.text = post.published
             textView3.text = post.content
-            imageView10.setImageResource(
-                if (post.likedByMe) R.drawable.heart_add else R.drawable.hearth
-            )
+            /*imageView10.setImageResource(
+                if (post.likedByMe) R.drawable.heart_svgrepo_com else R.drawable.hearth_svgrepo_com
+            )*/
+            like.isChecked = post.likedByMe
+            like.text = "${post.likes}"
+
+
             imageView15.setOnClickListener {
                 PopupMenu(it.context, it).apply {
                     inflate(R.menu.options_post)
@@ -70,7 +66,6 @@ class PostViewHolder(
                                 onInteractionListener.onRemove(post)
                                 true
                             }
-
                             R.id.edit -> {
                                 onInteractionListener.onEdit(post)
                                 true
@@ -97,10 +92,20 @@ class PostViewHolder(
                 post.share >= 1_000 -> "${post.share / 1_000}.${post.share % 1_000 / 100}К"
                 else -> post.share.toString()
             }
-
             imageView11.setOnClickListener {
                 onInteractionListener.onShare(post)
             }
         }
     }
 }
+
+class PostDiffCallback : DiffUtil.ItemCallback<Post>() {
+    override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
+        return oldItem == newItem
+    }
+}
+

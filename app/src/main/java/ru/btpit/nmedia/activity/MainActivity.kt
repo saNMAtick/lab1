@@ -1,15 +1,18 @@
 package ru.btpit.nmedia.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.launch
 import androidx.activity.viewModels
+import ru.btpit.nmedia.R
 import ru.btpit.nmedia.adapter.OnInteractionListener
 import ru.btpit.nmedia.adapter.PostsAdapter
 import ru.btpit.nmedia.databinding.ActivityMainBinding
+import ru.btpit.nmedia.post.NewPostResultContract
 import ru.btpit.nmedia.util.AndroidUtils
 import ru.btpit.nmedia.viewmodel.PostViewModel
-
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +35,16 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onShare(post: Post) {
-                viewModel.shareById((post.id))
+                //viewModel.shareById((post.id))
+                val intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, post.content)
+                    type = "text/plain"
+                }
+
+                val shareIntent =
+                    Intent.createChooser(intent, getString(R.string.chooser_share_post))
+                startActivity(shareIntent)
             }
         })
         binding.list.adapter = adapter
@@ -55,8 +67,7 @@ class MainActivity : AppCompatActivity() {
                 if (text.isNullOrBlank()) {
                     Toast.makeText(
                         this@MainActivity,
-                        "Ошибка",
-                        //  context.getString(com.google.android.material.R.string.error_icon_content_description)
+                        context.getString(R.string.error_empty_content),
                         Toast.LENGTH_SHORT
                     ).show()
                     return@setOnClickListener
@@ -68,8 +79,23 @@ class MainActivity : AppCompatActivity() {
                 AndroidUtils.hideKeyboard(this)
             }
         }
+        val newPostLauncher = registerForActivityResult(NewPostResultContract()) { result ->
+            result ?: return@registerForActivityResult
+            viewModel.changeContent(result)
+            viewModel.save()
+        }
+
+        binding.save.setOnClickListener {
+            newPostLauncher.launch()
+        }
+
+        /*binding.list.adapter = adapter
+        viewModel.data.observe(this) { posts ->
+            adapter.list = posts
+        }*/
     }
 }
+
 
 data class Post(
     val id: Long,

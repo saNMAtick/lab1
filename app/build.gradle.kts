@@ -36,9 +36,9 @@ buildFeatures.viewBinding = true
 }
 
 dependencies {
-    testImplementation("androidx.arch.core:core-testing:2.1.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.0")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
@@ -47,4 +47,5 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("androidx.activity:activity-ktx:1.8.2")
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
 }

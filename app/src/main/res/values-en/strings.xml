@@ -2,4 +2,16 @@
 <resources>
     <string name="app_name">Adidas</string>
     <string name="sys">Adidas</string>
+    <string name="text">Adidas</string>
+    <string name="text1">September 11 at 11:11 am</string>
+    <string name="text2">adidas is a manufacturer of sportswear and footwear, founded in 1949 in Germany. The Three-Stripe Brand is one of the largest sports companies in history. A genius of innovation, a legend of tennis courts and all kinds of sneakers, adidas has had a huge impact on the sporting goods industry, fashion, culture and music.</string>
+    <string name="_27">0</string>
+    <string name="_8">0</string>
+    <string name="_12">0</string>
+    <string name="description_post_save">Save</string>
+    <string name="menu_edit">To change</string>
+    <string name="menu_remove">Remove</string>
+    <string name="post_text">Enter…</string>
+    <string name="error_empty_content">The content cannot be empty</string>
+    <string name="chooser_share_post">To share</string>
 </resources>

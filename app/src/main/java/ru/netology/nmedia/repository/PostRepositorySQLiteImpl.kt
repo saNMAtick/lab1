@@ -17,7 +17,6 @@ class PostRepositorySQLiteImpl(
     }
 
     override fun getAll(): LiveData<List<Post>> = data
-
     override fun save(post: Post) {
         val id = post.id
         val saved = dao.save(post)
@@ -30,7 +29,6 @@ class PostRepositorySQLiteImpl(
         }
         data.value = posts
     }
-
     override fun likeById(id: Long) {
         dao.likeById(id)
         posts = posts.map {
@@ -41,11 +39,9 @@ class PostRepositorySQLiteImpl(
         }
         data.value = posts
     }
-
     override fun removeById(id: Long) {
         dao.removeById(id)
         posts = posts.filter { it.id != id }
         data.value = posts
     }
 }
-
